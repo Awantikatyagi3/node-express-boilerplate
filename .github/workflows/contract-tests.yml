@@ -49,11 +49,9 @@ jobs:
           fi
           
           echo "Appending token to specmatic.yaml..."
-          cat <<EOF >> specmatic.yaml
-auth:
-  bearerAuth:
-    bearer: "$TOKEN"
-EOF
+          echo "auth:" >> specmatic.yaml
+          echo "  bearerAuth:" >> specmatic.yaml
+          echo "    bearer: \"$TOKEN\"" >> specmatic.yaml
 
       - name: Run Specmatic Contract Tests
         run: |
