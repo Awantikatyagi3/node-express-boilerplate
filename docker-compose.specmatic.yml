@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  specmatic:
+    image: specmatic/specmatic:latest
+    depends_on:
+      node-app:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: test --host node-app --port 3000
+    networks:
+      - node-network
+    environment:
+      - SPECMATIC_GENERATIVE_TESTS=true
