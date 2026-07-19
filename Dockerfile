@@ -6,7 +6,7 @@ WORKDIR /usr/src/node-app
 
 COPY package.json yarn.lock ./
 
-RUN corepack enable
+RUN npm install -g yarn
 
 USER node
 
