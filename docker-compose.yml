@@ -12,6 +12,7 @@ services:
       - mongodb
     volumes:
       - .:/usr/src/node-app
+      - /usr/src/node-app/node_modules
     networks:
       - node-network
     healthcheck:
