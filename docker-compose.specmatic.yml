@@ -1,11 +1,7 @@
-
-
 services:
   specmatic:
     image: specmatic/specmatic:latest
     depends_on:
-      node-app:
-        condition: service_healthy
       token-generator:
         condition: service_completed_successfully
     volumes:
@@ -29,25 +25,35 @@ services:
     command: node scripts/token-generator.js
     networks:
       - node-network
-node-app:
-  build: .
-  image: node-app
-  environment:
-    - MONGODB_URL=mongodb://mongodb:27017/node-boilerplate
-  ports:
-    - '3000:3000'
-  depends_on:
-    - mongodb
-  volumes:
-    - .:/usr/src/node-app
-    - /usr/src/node-app/node_modules
-  networks:
-    - node-network
-  healthcheck:
-    test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/v1/docs"]
-    interval: 10s
-    timeout: 5s
-    retries: 5
+  node-app:
+    build: .
+    image: node-app
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/node-boilerplate
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/usr/src/node-app
+      - /usr/src/node-app/node_modules
+    networks:
+      - node-network
+    healthcheck:
+      test: ["CMD","wget","--spider","-q","http://localhost:3000/v1/docs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  mongodb:
+    image: mongo:4.2.1-bionic
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - node-network
+volumes:
+  dbdata:
 
 networks:
   node-network:
