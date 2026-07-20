@@ -50,9 +50,10 @@ jobs:
             echo "Failed to get token! Response: $RESPONSE"
             exit 1
           fi
-          
           echo "Setting bearerAuth token as environment variable for Specmatic"
           echo "bearerAuth=$TOKEN" >> $GITHUB_ENV
+          mkdir -p token
+          echo "BEARER_TOKEN=$TOKEN" > token/.env
 
       - name: Run Specmatic Contract Tests
         run: |
