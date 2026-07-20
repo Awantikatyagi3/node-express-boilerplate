@@ -1,7 +1,5 @@
 version: "3"
 
-
-
 systemUnderTest:
   service:
     definitions:
@@ -11,3 +9,9 @@ systemUnderTest:
               directory: "."
           specs:
             - "openapi.yaml"
+
+components:
+  runOptions:
+    sut:
+      type: test
+      baseUrl: "http://node-app:3000/v1"
