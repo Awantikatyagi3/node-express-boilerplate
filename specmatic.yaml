@@ -10,7 +10,10 @@ systemUnderTest:
           specs:
             - "openapi.yaml"
     runOptions:
-      $ref: "#/components/runOptions/test"
+      auth:
+        bearerAuth:
+          bearer: "${BEARER_TOKEN}"
+      baseUrl: "http://node-app:3000/v1"
 components:
   runOptions:
     test:

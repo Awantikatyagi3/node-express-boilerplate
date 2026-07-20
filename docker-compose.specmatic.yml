@@ -6,6 +6,8 @@ services:
     depends_on:
       node-app:
         condition: service_healthy
+      token-generator:
+        condition: service_completed_successfully
     volumes:
       - .:/usr/src/app
     working_dir: /usr/src/app
@@ -14,4 +16,16 @@ services:
       - node-network
     environment:
       - SPECMATIC_GENERATIVE_TESTS=true
-      - bearerAuth=${bearerAuth}
+    env_file:
+      - ./token/.env
+  token-generator:
+    image: node:14-alpine
+    depends_on:
+      node-app:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: node scripts/token-generator.js
+    networks:
+      - node-network
