@@ -1,4 +1,9 @@
 version: "3"
+
+auth:
+  bearerAuth:
+    bearer: "${bearerAuth}"
+
 systemUnderTest:
   service:
     definitions:
