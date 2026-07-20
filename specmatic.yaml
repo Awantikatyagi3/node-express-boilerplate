@@ -9,10 +9,10 @@ systemUnderTest:
               directory: "."
           specs:
             - "openapi.yaml"
-    runOptions:
-      baseUrl: "http://node-app:3000/v1"
+    runOptions: $ref: "#/components/runOptions/test"
 components:
   runOptions:
-    sut:
-      type: test
-      baseUrl: "http://node-app:3000/v1"
+    test:
+      openapi:
+        type: test
+        baseUrl: "http://node-app:3000/v1"
