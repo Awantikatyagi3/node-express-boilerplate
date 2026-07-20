@@ -14,3 +14,4 @@ services:
       - node-network
     environment:
       - SPECMATIC_GENERATIVE_TESTS=true
+      - bearerAuth=${bearerAuth}

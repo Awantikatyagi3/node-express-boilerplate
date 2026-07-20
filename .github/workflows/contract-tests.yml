@@ -51,10 +51,8 @@ jobs:
             exit 1
           fi
           
-          echo "Appending token to specmatic.yaml..."
-          echo "auth:" >> specmatic.yaml
-          echo "  bearerAuth:" >> specmatic.yaml
-          echo "    bearer: \"$TOKEN\"" >> specmatic.yaml
+          echo "Setting bearerAuth token as environment variable for Specmatic"
+          echo "bearerAuth=$TOKEN" >> $GITHUB_ENV
 
       - name: Run Specmatic Contract Tests
         run: |
