@@ -1,4 +1,4 @@
-version: '3'
+
 
 services:
   specmatic:
@@ -29,3 +29,26 @@ services:
     command: node scripts/token-generator.js
     networks:
       - node-network
+node-app:
+  build: .
+  image: node-app
+  environment:
+    - MONGODB_URL=mongodb://mongodb:27017/node-boilerplate
+  ports:
+    - '3000:3000'
+  depends_on:
+    - mongodb
+  volumes:
+    - .:/usr/src/node-app
+    - /usr/src/node-app/node_modules
+  networks:
+    - node-network
+  healthcheck:
+    test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/v1/docs"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
+
+networks:
+  node-network:
+    external: true
