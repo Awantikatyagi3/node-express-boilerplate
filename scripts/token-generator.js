@@ -10,13 +10,25 @@ const testUser = {
 
 (async () => {
   try {
-    const response = await axios.post('http://node-app:3000/v1/auth/login', testUser);
+    let response = await axios.post('http://node-app:3000/v1/auth/login', testUser);
+    let token = response.data.token || response.data.accessToken || response.data.BEARER_TOKEN;
 
-    const token = response.data.token || response.data.accessToken || response.data.BEARER_TOKEN;
-
+    // If login failed (no token), attempt to register then login again
     if (!token) {
-      process.stderr.write('Login response did not contain a token\n');
-      process.exit(1);
+      // Register the test user
+      await axios.post('http://node-app:3000/v1/auth/register', {
+        name: 'Specmatic Test',
+        email: testUser.email,
+        password: testUser.password,
+      });
+      // Retry login
+      response = await axios.post('http://node-app:3000/v1/auth/login', testUser);
+      token = response.data.token || response.data.accessToken || response.data.BEARER_TOKEN;
+
+      if (!token) {
+        process.stderr.write('Unable to obtain token after registration\n');
+        process.exit(1);
+      }
     }
 
     const envContent = `BEARER_TOKEN=${token}\n`;
