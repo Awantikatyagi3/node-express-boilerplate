@@ -9,7 +9,8 @@ systemUnderTest:
               directory: "."
           specs:
             - "openapi.yaml"
-
+    runOptions:
+      baseUrl: "http://node-app:3000/v1"
 components:
   runOptions:
     sut:
