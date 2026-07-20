@@ -9,7 +9,8 @@ systemUnderTest:
               directory: "."
           specs:
             - "openapi.yaml"
-    runOptions: $ref: "#/components/runOptions/test"
+    runOptions:
+      $ref: "#/components/runOptions/test"
 components:
   runOptions:
     test:
