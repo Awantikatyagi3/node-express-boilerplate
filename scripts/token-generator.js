@@ -35,20 +35,23 @@ function sleep(ms) {
   let token;
   while (attempt < maxAttempts) {
     try {
-      let response = await axios.post('http://node-app:3000/v1/auth/login', testUser);
+      // Always attempt to register first. If it fails (e.g. email already exists), it's fine.
+      try {
+        await axios.post('http://node-app:3000/v1/auth/register', {
+          name: 'Specmatic Test',
+          email: testUser.email,
+          password: testUser.password,
+        });
+      } catch (regErr) {
+        // Ignore registration errors (likely user already exists)
+      }
+
+      // Now attempt to login
+      const response = await axios.post('http://node-app:3000/v1/auth/login', testUser);
       token = response.data.token || response.data.accessToken || response.data.BEARER_TOKEN;
       if (token) break; // success
-      // If login succeeded but no token, try to register then login again
-      await axios.post('http://node-app:3000/v1/auth/register', {
-        name: 'Specmatic Test',
-        email: testUser.email,
-        password: testUser.password,
-      });
-      response = await axios.post('http://node-app:3000/v1/auth/login', testUser);
-      token = response.data.token || response.data.accessToken || response.data.BEARER_TOKEN;
-      if (token) break;
     } catch (err) {
-      // Likely service not ready yet
+      // Likely service not ready or login failed
     }
     attempt++;
     const delay = 5000 * attempt; // 5 s * attempt
