@@ -1,37 +1,11 @@
 services:
-  specmatic:
-    image: specmatic/specmatic:latest
-    depends_on:
-      token-generator:
-        condition: service_completed_successfully
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    command: test --host node-app --port 3000
-    networks:
-      - node-network
-    environment:
-      - SPECMATIC_GENERATIVE_TESTS=true
-    env_file:
-      - ./token/.env
-  token-generator:
-    image: node:14-alpine
-    depends_on:
-      node-app:
-        condition: service_healthy
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    command: node scripts/token-generator.js
-    networks:
-      - node-network
   node-app:
     build: .
     image: node-app
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/node-boilerplate
     ports:
-      - '3000:3000'
+      - "3000:3000"
     depends_on:
       - mongodb
     volumes:
@@ -44,17 +18,49 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
   mongodb:
     image: mongo:4.2.1-bionic
     ports:
-      - '27017:27017'
+      - "27017:27017"
     volumes:
       - dbdata:/data/db
     networks:
       - node-network
+
+  token-generator:
+    image: node:14-alpine
+    depends_on:
+      node-app:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: node scripts/token-generator.js
+    networks:
+      - node-network
+
+  specmatic:
+    image: specmatic/specmatic:latest
+    depends_on:
+      node-app:
+        condition: service_healthy
+      token-generator:
+        condition: service_completed_successfully
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: test --host node-app --port 3000
+    networks:
+      - node-network
+    environment:
+      - SPECMATIC_GENERATIVE_TESTS=true
+    env_file:
+      - ./token/.env
+
 volumes:
   dbdata:
 
 networks:
   node-network:
-    external: true
+    driver: bridge
