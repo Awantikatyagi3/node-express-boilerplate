@@ -48,7 +48,13 @@ function sleep(ms) {
 
       // Now attempt to login
       const response = await axios.post('http://node-app:3000/v1/auth/login', testUser);
-      token = response.data.token || response.data.accessToken || response.data.BEARER_TOKEN;
+      if (response.data && response.data.tokens && response.data.tokens.access && response.data.tokens.access.token) {
+        token = response.data.tokens.access.token;
+      } else if (response.data && response.data.token) {
+        token = response.data.token;
+      } else if (response.data && response.data.accessToken) {
+        token = response.data.accessToken;
+      }
       if (token) break; // success
     } catch (err) {
       // Likely service not ready or login failed

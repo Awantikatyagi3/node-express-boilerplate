@@ -9,14 +9,4 @@ systemUnderTest:
               directory: "."
           specs:
             - "openapi.yaml"
-    runOptions:
-      auth:
-        bearerAuth:
-          bearer: "${BEARER_TOKEN}"
-      baseUrl: "http://node-app:3000/v1"
-components:
-  runOptions:
-    test:
-      openapi:
-        type: test
-        baseUrl: "http://node-app:3000/v1"
+

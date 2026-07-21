@@ -3,7 +3,7 @@ services:
     build: .
     image: node-app
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=test
       - MONGODB_URL=mongodb://mongodb:27017/node-boilerplate
     ports:
       - "3000:3000"
@@ -58,7 +58,7 @@ services:
     volumes:
       - .:/usr/src/app
     working_dir: /usr/src/app
-    command: test --host node-app --port 3000
+    command: test --testBaseURL http://node-app:3000/v1
     networks:
       - node-network
     environment:
