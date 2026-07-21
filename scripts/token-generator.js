@@ -16,8 +16,21 @@ function sleep(ms) {
 }
 
 (async () => {
-  // Retry login/register until the app is reachable (max 10 attempts)
-  const maxAttempts = 10;
+  // Wait for the Node app health endpoint before attempting login
+  async function waitForApp() {
+    const healthUrl = 'http://node-app:3000/v1/docs';
+    const maxHealthAttempts = 30;
+    for (let i = 1; i <= maxHealthAttempts; i++) {
+      try {
+        await axios.get(healthUrl);
+        break;
+      } catch (e) {
+        await sleep(2000);
+      }
+    }
+  }
+  await waitForApp();
+  const maxAttempts = 20;
   let attempt = 0;
   let token;
   while (attempt < maxAttempts) {
@@ -38,7 +51,7 @@ function sleep(ms) {
       // Likely service not ready yet
     }
     attempt++;
-    const delay = 3000 * attempt; // incremental backoff
+    const delay = 5000 * attempt; // 5 s * attempt
     process.stderr.write(`Token generator: attempt ${attempt} failed, retrying in ${delay / 1000}s...\n`);
     await sleep(delay);
   }
@@ -59,4 +72,4 @@ function sleep(ms) {
   /* eslint-enable security/detect-non-literal-fs-filename */
   process.stdout.write(`Token written to ${envPath}\n`);
 })();
-// Duplicate code removed – original retry implementation retained
+// Duplicate code removed - original retry implementation retained

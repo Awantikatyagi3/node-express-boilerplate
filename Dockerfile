@@ -16,4 +16,4 @@ COPY --chown=node:node . .
 EXPOSE 3000
 
 # Start the app (npm start uses the script defined in package.json)
-CMD [ npm, start]
+CMD ["npm", "start"]
