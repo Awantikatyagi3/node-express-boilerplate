@@ -1,0 +1,15 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/auth/logout",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE3ODQ2NTUxNDksImV4cCI6MTc4NzI0NzE0OCwidHlwZSI6InJlZnJlc2gifQ.9CAdSNRvI9-jwR1Uwtm1PecNHVXzZmHlW7f22geSnz4"
+    }
+  },
+  "http-response": {
+    "status": 204
+  }
+}

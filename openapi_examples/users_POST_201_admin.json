@@ -1,0 +1,29 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/users",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTVmYTUyMGVlYWU0OTdlMmJhYzgwOTciLCJpYXQiOjE3ODQ2NTUxNDYsImV4cCI6MTc4NDY1Njk0NiwidHlwZSI6ImFjY2VzcyJ9.lxGhvtplHro1502CGW8HVs2VxzUiR4qnWvvpLy9WpaA",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "new admin",
+      "email": "newadmin@example.com",
+      "password": "password1",
+      "role": "admin"
+    }
+  },
+  "http-response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "(string)",
+      "email": "newadmin@example.com",
+      "name": "new admin",
+      "role": "admin",
+      "isEmailVerified": false
+    }
+  }
+}

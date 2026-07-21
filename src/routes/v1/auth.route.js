@@ -68,6 +68,20 @@ module.exports = router;
  *                   $ref: '#/components/schemas/User'
  *                 tokens:
  *                   $ref: '#/components/schemas/AuthTokens'
+ *             example:
+ *               user:
+ *                 id: 5ebac534954b54139806c112
+ *                 email: fake@example.com
+ *                 name: fake name
+ *                 role: user
+ *                 isEmailVerified: false
+ *               tokens:
+ *                 access:
+ *                   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+ *                   expires: 2020-05-12T16:18:04.793Z
+ *                 refresh:
+ *                   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+ *                   expires: 2020-05-12T16:18:04.793Z
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  */
@@ -109,6 +123,22 @@ module.exports = router;
  *                   $ref: '#/components/schemas/User'
  *                 tokens:
  *                   $ref: '#/components/schemas/AuthTokens'
+ *             example:
+ *               user:
+ *                 id: 5ebac534954b54139806c112
+ *                 email: fake@example.com
+ *                 name: fake name
+ *                 role: user
+ *                 isEmailVerified: false
+ *               tokens:
+ *                 access:
+ *                   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+ *                   expires: 2020-05-12T16:18:04.793Z
+ *                 refresh:
+ *                   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+ *                   expires: 2020-05-12T16:18:04.793Z
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         description: Invalid email or password
  *         content:
@@ -142,6 +172,8 @@ module.exports = router;
  *     responses:
  *       "204":
  *         description: No content
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
@@ -172,6 +204,15 @@ module.exports = router;
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/AuthTokens'
+ *             example:
+ *               access:
+ *                 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+ *                 expires: 2020-05-12T16:18:04.793Z
+ *               refresh:
+ *                 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+ *                 expires: 2020-05-12T16:18:04.793Z
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  */
@@ -200,6 +241,8 @@ module.exports = router;
  *     responses:
  *       "204":
  *         description: No content
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
@@ -236,6 +279,8 @@ module.exports = router;
  *     responses:
  *       "204":
  *         description: No content
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         description: Password reset failed
  *         content:
@@ -279,6 +324,8 @@ module.exports = router;
  *     responses:
  *       "204":
  *         description: No content
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         description: verify email failed
  *         content:

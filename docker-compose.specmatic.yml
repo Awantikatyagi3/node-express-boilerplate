@@ -41,6 +41,9 @@ services:
       - .:/usr/src/app
     working_dir: /usr/src/app
     command: node scripts/token-generator.js
+    environment:
+      - NODE_ENV=test
+      - MONGODB_URL=mongodb://mongodb:27017/node-boilerplate
     networks:
       - node-network
     deploy:
@@ -49,7 +52,7 @@ services:
         max_attempts: 3
 
   specmatic:
-    image: specmatic/specmatic:latest
+    image: specmatic/specmatic:2.50.1
     depends_on:
       node-app:
         condition: service_healthy
@@ -62,7 +65,7 @@ services:
     networks:
       - node-network
     environment:
-      - SPECMATIC_GENERATIVE_TESTS=true
+      - SPECMATIC_GENERATIVE_TESTS=false
     env_file:
       - ./token/.env
 

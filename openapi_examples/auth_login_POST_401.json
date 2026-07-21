@@ -1,0 +1,23 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/auth/login",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "email": "wrong@example.com",
+      "password": "wrongpassword1"
+    }
+  },
+  "http-response": {
+    "status": 401,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "code": 401,
+      "message": "Invalid email or password"
+    }
+  }
+}

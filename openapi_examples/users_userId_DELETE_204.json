@@ -1,0 +1,12 @@
+{
+  "http-request": {
+    "method": "DELETE",
+    "path": "/users/5ebac534954b54139806c113",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YTVmYTUyMGVlYWU0OTdlMmJhYzgwOTciLCJpYXQiOjE3ODQ2NTUxNDYsImV4cCI6MTc4NDY1Njk0NiwidHlwZSI6ImFjY2VzcyJ9.lxGhvtplHro1502CGW8HVs2VxzUiR4qnWvvpLy9WpaA"
+    }
+  },
+  "http-response": {
+    "status": 204
+  }
+}

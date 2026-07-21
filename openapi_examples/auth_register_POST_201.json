@@ -1,0 +1,39 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/auth/register",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "password1"
+    }
+  },
+  "http-response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "user": {
+        "id": "(string)",
+        "email": "john@example.com",
+        "name": "John Doe",
+        "role": "user",
+        "isEmailVerified": false
+      },
+      "tokens": {
+        "access": {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder",
+          "expires": "2035-01-01T00:00:00.000Z"
+        },
+        "refresh": {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder",
+          "expires": "2035-02-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

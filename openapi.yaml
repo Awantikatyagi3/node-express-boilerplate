@@ -51,6 +51,22 @@ paths:
                     $ref: '#/components/schemas/User'
                   tokens:
                     $ref: '#/components/schemas/AuthTokens'
+              example:
+                user:
+                  id: 5ebac534954b54139806c112
+                  email: fake@example.com
+                  name: fake name
+                  role: user
+                  isEmailVerified: false
+                tokens:
+                  access:
+                    token: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+                    expires: '2020-05-12T16:18:04.793Z'
+                  refresh:
+                    token: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+                    expires: '2020-05-12T16:18:04.793Z'
         '400':
           $ref: '#/components/responses/DuplicateEmail'
   /auth/login:
@@ -89,6 +105,24 @@ paths:
                     $ref: '#/components/schemas/User'
                   tokens:
                     $ref: '#/components/schemas/AuthTokens'
+              example:
+                user:
+                  id: 5ebac534954b54139806c112
+                  email: fake@example.com
+                  name: fake name
+                  role: user
+                  isEmailVerified: false
+                tokens:
+                  access:
+                    token: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+                    expires: '2020-05-12T16:18:04.793Z'
+                  refresh:
+                    token: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+                    expires: '2020-05-12T16:18:04.793Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           description: Invalid email or password
           content:
@@ -120,6 +154,8 @@ paths:
       responses:
         '204':
           description: No content
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
   /auth/refresh-tokens:
@@ -148,6 +184,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthTokens'
+              example:
+                access:
+                  token: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+                  expires: '2020-05-12T16:18:04.793Z'
+                refresh:
+                  token: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+                  expires: '2020-05-12T16:18:04.793Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
   /auth/forgot-password:
@@ -173,6 +220,8 @@ paths:
       responses:
         '204':
           description: No content
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
   /auth/reset-password:
@@ -206,6 +255,8 @@ paths:
       responses:
         '204':
           description: No content
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           description: Password reset failed
           content:
@@ -243,6 +294,8 @@ paths:
       responses:
         '204':
           description: No content
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           description: verify email failed
           content:
@@ -300,6 +353,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              example:
+                id: 5ebac534954b54139806c112
+                email: fake@example.com
+                name: fake name
+                role: user
+                isEmailVerified: false
         '400':
           $ref: '#/components/responses/DuplicateEmail'
         '401':
@@ -319,16 +378,19 @@ paths:
           schema:
             type: string
           description: User name
+          example: fake
         - in: query
           name: role
           schema:
             type: string
           description: User role
+          example: user
         - in: query
           name: sortBy
           schema:
             type: string
           description: sort by query in the form of field:desc/asc (ex. name:asc)
+          example: name:asc
         - in: query
           name: limit
           schema:
@@ -336,6 +398,7 @@ paths:
             minimum: 1
             default: 10
           description: Maximum number of users
+          example: 10
         - in: query
           name: page
           schema:
@@ -343,6 +406,7 @@ paths:
             minimum: 1
             default: 1
           description: Page number
+          example: 1
       responses:
         '200':
           description: OK
@@ -367,6 +431,19 @@ paths:
                   totalResults:
                     type: integer
                     example: 1
+              example:
+                results:
+                  - id: 5ebac534954b54139806c112
+                    email: fake@example.com
+                    name: fake name
+                    role: user
+                    isEmailVerified: false
+                page: 1
+                limit: 10
+                totalPages: 1
+                totalResults: 1
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -388,6 +465,7 @@ paths:
           schema:
             type: string
           description: User id
+          example: 5ebac534954b54139806c112
       responses:
         '200':
           description: OK
@@ -395,6 +473,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              example:
+                id: 5ebac534954b54139806c112
+                email: fake@example.com
+                name: fake name
+                role: user
+                isEmailVerified: false
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -417,12 +503,14 @@ paths:
           schema:
             type: string
           description: User id
+          example: 5ebac534954b54139806c112
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+              minProperties: 1
               properties:
                 name:
                   type: string
@@ -446,6 +534,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              example:
+                id: 5ebac534954b54139806c112
+                email: fake@example.com
+                name: fake name
+                role: user
+                isEmailVerified: false
         '400':
           $ref: '#/components/responses/DuplicateEmail'
         '401':
@@ -470,9 +564,12 @@ paths:
           schema:
             type: string
           description: User id
+          example: 5ebac534954b54139806c112
       responses:
         '204':
           description: No content
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -501,11 +598,14 @@ components:
           enum:
             - user
             - admin
+        isEmailVerified:
+          type: boolean
       example:
         id: 5ebac534954b54139806c112
         email: fake@example.com
         name: fake name
         role: user
+        isEmailVerified: false
     Token:
       type: object
       properties:
@@ -525,6 +625,15 @@ components:
           $ref: '#/components/schemas/Token'
         refresh:
           $ref: '#/components/schemas/Token'
+      example:
+        access:
+          token: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+          expires: '2020-05-12T16:18:04.793Z'
+        refresh:
+          token: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+          expires: '2020-05-12T16:18:04.793Z'
     Error:
       type: object
       properties:
@@ -532,7 +641,19 @@ components:
           type: number
         message:
           type: string
+      example:
+        code: 400
+        message: Invalid request payload
   responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 400
+            message: Bad Request
     DuplicateEmail:
       description: Email already taken
       content:

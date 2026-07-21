@@ -73,6 +73,12 @@ module.exports = router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/User'
+ *             example:
+ *               id: 5ebac534954b54139806c112
+ *               email: fake@example.com
+ *               name: fake name
+ *               role: user
+ *               isEmailVerified: false
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -92,16 +98,19 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: User name
+ *         example: fake
  *       - in: query
  *         name: role
  *         schema:
  *           type: string
  *         description: User role
+ *         example: user
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
  *         description: sort by query in the form of field:desc/asc (ex. name:asc)
+ *         example: name:asc
  *       - in: query
  *         name: limit
  *         schema:
@@ -109,6 +118,7 @@ module.exports = router;
  *           minimum: 1
  *           default: 10
  *         description: Maximum number of users
+ *         example: 10
  *       - in: query
  *         name: page
  *         schema:
@@ -116,6 +126,7 @@ module.exports = router;
  *           minimum: 1
  *           default: 1
  *         description: Page number
+ *         example: 1
  *     responses:
  *       "200":
  *         description: OK
@@ -140,6 +151,19 @@ module.exports = router;
  *                 totalResults:
  *                   type: integer
  *                   example: 1
+ *             example:
+ *               results:
+ *                 - id: 5ebac534954b54139806c112
+ *                   email: fake@example.com
+ *                   name: fake name
+ *                   role: user
+ *                   isEmailVerified: false
+ *               page: 1
+ *               limit: 10
+ *               totalPages: 1
+ *               totalResults: 1
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -162,6 +186,7 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: User id
+ *         example: 5ebac534954b54139806c112
  *     responses:
  *       "200":
  *         description: OK
@@ -169,6 +194,14 @@ module.exports = router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/User'
+ *             example:
+ *               id: 5ebac534954b54139806c112
+ *               email: fake@example.com
+ *               name: fake name
+ *               role: user
+ *               isEmailVerified: false
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -189,6 +222,7 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: User id
+ *         example: 5ebac534954b54139806c112
  *     requestBody:
  *       required: true
  *       content:
@@ -218,6 +252,12 @@ module.exports = router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/User'
+ *             example:
+ *               id: 5ebac534954b54139806c112
+ *               email: fake@example.com
+ *               name: fake name
+ *               role: user
+ *               isEmailVerified: false
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -240,9 +280,12 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: User id
+ *         example: 5ebac534954b54139806c112
  *     responses:
  *       "204":
  *         description: No content
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

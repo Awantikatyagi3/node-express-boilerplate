@@ -1,0 +1,12 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/auth/verify-email",
+    "query": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE3ODQ2NTUxNDgsImV4cCI6MTc4NDY1NTc0OCwidHlwZSI6InZlcmlmeUVtYWlsIn0.Bkj-OII_GOSpQ2iQ2TahBCBXgiE_DpSIR5iIGV7vGrE"
+    }
+  },
+  "http-response": {
+    "status": 204
+  }
+}

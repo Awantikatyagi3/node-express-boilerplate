@@ -20,6 +20,10 @@ if (config.env !== 'test') {
  */
 const sendEmail = async (to, subject, text) => {
   const msg = { from: config.email.from, to, subject, text };
+  if (config.env === 'test') {
+    logger.info('Skipping email send in test environment');
+    return Promise.resolve();
+  }
   await transport.sendMail(msg);
 };
 
